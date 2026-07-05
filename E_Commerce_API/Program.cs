@@ -1,6 +1,8 @@
 
 using E_Commerce_Application;
+using E_Commerce_Application.Profiles;
 using E_Commerce_Infrastructure;
+using Microsoft.Extensions.FileProviders;
 
 namespace E_Commerce_API
 {
@@ -15,6 +17,7 @@ namespace E_Commerce_API
             builder.Services.AddControllers();
             builder.Services.AddInfrastructureServices(builder.Configuration);
             builder.Services.AddApplicationServices();
+            builder.Services.Configure<UrlSettings>(builder.Configuration.GetSection("UrlSettings"));
 
 
 
@@ -33,6 +36,12 @@ namespace E_Commerce_API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath,"Files")),
+                RequestPath = "/Files"
+            });
 
             app.UseHttpsRedirection();
 
