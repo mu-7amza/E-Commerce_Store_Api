@@ -19,7 +19,6 @@ namespace E_Commerce_Infrastructure.Repository
             {
 
                 query = specification.IncludeExpressions.Aggregate(query, (current, includeExpression) => current.Include(includeExpression));
-                return query;
             }
             if(specification.Criteria != null)
             {

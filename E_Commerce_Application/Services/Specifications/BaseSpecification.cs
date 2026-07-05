@@ -13,7 +13,7 @@ namespace E_Commerce_Application.Services.Specifications
     {
         public List<Expression<Func<TEntity, object>>> IncludeExpressions { get; } = [];
 
-        public Expression<Func<TEntity, bool>>? Criteria { get; private set; }
+        public Expression<Func<TEntity, bool>> Criteria { get; private set; }
 
         protected BaseSpecification(Expression<Func<TEntity,bool>> criteria = null)
         {
