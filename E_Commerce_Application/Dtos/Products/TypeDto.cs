@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Commerce_Application.Dtos
+namespace E_Commerce_Application.Dtos.Products
 {
-    public class BrandDto
+    public class TypeDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

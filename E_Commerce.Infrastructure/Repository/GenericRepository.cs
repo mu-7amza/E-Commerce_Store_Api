@@ -24,9 +24,27 @@ namespace E_Commerce_Infrastructure.Repository
            return await _context.Set<TEntity>().ToListAsync(ct);
         }
 
+        public async Task<IReadOnlyList<TEntity>> GetAllWithSpecAsync(ISpecifications<TEntity, TKey> specification, CancellationToken ct)
+        {
+           var result = SpecificationEvaluator.CreateQuery<TEntity, TKey>(_context.Set<TEntity>(), specification);
+            return await result.ToListAsync(ct);
+        }
+
         public async Task<TEntity?> GetByIdAsync(TKey id, CancellationToken ct)
         {
           return await _context.Set<TEntity>().FindAsync(id, ct);
+        }
+
+        public async Task<TEntity?> GetByIdWithSpecAsync(ISpecifications<TEntity, TKey> spec, CancellationToken ct)
+        {
+            var result = SpecificationEvaluator.CreateQuery<TEntity, TKey>(_context.Set<TEntity>(), spec);
+            return await result.FirstOrDefaultAsync(ct);
+        }
+
+        public async Task<int> GetProductsCountWithSpecAsync(ISpecifications<TEntity, TKey> specification, CancellationToken ct)
+        {
+            var result = SpecificationEvaluator.CreateQuery<TEntity, TKey>(_context.Set<TEntity>(), specification);
+            return await result.CountAsync(ct);
         }
 
         public void Update(TEntity entity) => _context.Set<TEntity>().Update(entity);
