@@ -14,7 +14,7 @@ namespace E_Commerce_Domain.Contracts
         void Delete(TEntity entity);
         Task<IReadOnlyList<TEntity>> GetAllAsync(CancellationToken ct);
         Task<IReadOnlyList<TEntity>> GetAllWithSpecAsync(ISpecifications<TEntity,Tkey> specification,CancellationToken ct);
-
+        Task<int> GetProductsCountWithSpecAsync(ISpecifications<TEntity, Tkey> specification, CancellationToken ct);
         Task<TEntity?> GetByIdAsync(Tkey id , CancellationToken ct);
         Task<TEntity?> GetByIdWithSpecAsync(ISpecifications<TEntity, Tkey> spec, CancellationToken ct);
 

@@ -41,6 +41,12 @@ namespace E_Commerce_Infrastructure.Repository
             return await result.FirstOrDefaultAsync(ct);
         }
 
+        public async Task<int> GetProductsCountWithSpecAsync(ISpecifications<TEntity, TKey> specification, CancellationToken ct)
+        {
+            var result = SpecificationEvaluator.CreateQuery<TEntity, TKey>(_context.Set<TEntity>(), specification);
+            return await result.CountAsync(ct);
+        }
+
         public void Update(TEntity entity) => _context.Set<TEntity>().Update(entity);
 
         

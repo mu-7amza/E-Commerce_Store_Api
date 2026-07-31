@@ -20,10 +20,32 @@ namespace E_Commerce_Infrastructure.Repository
 
                 query = specification.IncludeExpressions.Aggregate(query, (current, includeExpression) => current.Include(includeExpression));
             }
+
+            // Cirteria
             if(specification.Criteria != null)
             {
                 query = query.Where(specification.Criteria);
             }
+
+            // Sorting
+
+            if (specification.OrderBy != null)
+            {
+                query = query.OrderBy(specification.OrderBy);
+            }
+
+            if(specification.OrderByDesc != null)
+            {
+                query = query.OrderByDescending(specification.OrderByDesc);
+            }
+
+            // Pagination
+
+            if (specification.IsPaginated)
+            {
+                query = query.Skip(specification.Skip).Take(specification.Take);
+            }
+
             return query;
         }
     }

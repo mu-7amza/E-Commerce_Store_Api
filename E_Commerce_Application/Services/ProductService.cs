@@ -2,6 +2,7 @@
 using E_Commerce_Application.Common;
 using E_Commerce_Application.Contracts;
 using E_Commerce_Application.Dtos;
+using E_Commerce_Application.Params;
 using E_Commerce_Application.Services.Specifications;
 using E_Commerce_Domain.Contracts;
 using E_Commerce_Domain.Entities.Products;
@@ -22,11 +23,15 @@ namespace E_Commerce_Application.Services
             return Result<IReadOnlyList<BrandDto>>.OK(data);
         }
 
-        public async Task<Result<IReadOnlyList<ProductDto>>> GetAllProductsAsync(int? brandId, int? typeId, CancellationToken ct)
+        public async Task<Result<PaginatedResult<ProductDto>>> GetAllProductsAsync(ProductQueryParams queryParams, CancellationToken ct)
         {
-            var spec = new ProductSpecification(brandId, typeId);
+            var spec = new ProductSpecification(queryParams);
             var products = await _unitOfWork.GetRepository<Product, int>().GetAllWithSpecAsync(spec,ct);
-            return Result<IReadOnlyList<ProductDto>>.OK(_mapper.Map<IReadOnlyList<ProductDto>>(products));
+            var mappedData = _mapper.Map<IReadOnlyList<ProductDto>>(products);
+            var countSpec = new ProductCountSpecification(queryParams); 
+            var totalCount = await _unitOfWork.GetRepository<Product,int>().GetProductsCountWithSpecAsync(countSpec,ct);
+            return Result<PaginatedResult<ProductDto>>.OK(new PaginatedResult<ProductDto>
+                (mappedData,queryParams.PageIndex,products.Count,totalCount));
         }
 
         public async Task<Result<IReadOnlyList<TypeDto>>> GetAllTypesAsync(CancellationToken ct)

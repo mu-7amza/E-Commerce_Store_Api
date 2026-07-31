@@ -12,5 +12,12 @@ namespace E_Commerce_Domain.Contracts
     {
         List<Expression<Func<TEntity,object>>> IncludeExpressions { get; }
         Expression<Func<TEntity, bool>>? Criteria { get; }
+        Expression<Func<TEntity, object>>? OrderBy { get; }
+        Expression<Func<TEntity, object>>? OrderByDesc { get; }
+        int Skip { get; }
+        int Take { get; }
+        bool IsPaginated { get; }
+
+
     }
 }
