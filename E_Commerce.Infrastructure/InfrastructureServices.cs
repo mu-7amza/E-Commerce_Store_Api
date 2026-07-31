@@ -27,6 +27,7 @@ namespace E_Commerce_Infrastructure
             {
                 return ConnectionMultiplexer.Connect(configuration.GetConnectionString("RedisConnection"));
             });
+            services.AddSingleton<ICasheRepository, CasheRepository>();
 
             return services;
         }
