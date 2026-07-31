@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using E_Commerce_Application.Dtos;
+using E_Commerce_Application.Dtos.Baskets;
 using E_Commerce_Domain.Entities.Basket;
 
 namespace E_Commerce_Application.Profiles

@@ -1,5 +1,5 @@
 ﻿using E_Commerce_Application.Contracts;
-using E_Commerce_Application.Dtos;
+using E_Commerce_Application.Dtos.Baskets;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

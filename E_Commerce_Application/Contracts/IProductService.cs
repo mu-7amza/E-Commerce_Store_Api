@@ -1,5 +1,5 @@
 ﻿using E_Commerce_Application.Common;
-using E_Commerce_Application.Dtos;
+using E_Commerce_Application.Dtos.Products;
 using E_Commerce_Application.Params;
 using System;
 using System.Collections.Generic;

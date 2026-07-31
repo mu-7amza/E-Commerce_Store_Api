@@ -40,6 +40,11 @@ namespace E_Commerce_Infrastructure
             {
                 await _roleManager.CreateAsync(new IdentityRole("Admin"));
                 await _roleManager.CreateAsync(new IdentityRole("SuperAdmin"));
+                _logger.LogInformation("Roles created successfully.");
+            }
+            else
+            {
+                _logger.LogInformation("Roles already exist. Skipping role creation.");
             }
 
             if (!await _userManager.Users.AnyAsync())
@@ -53,14 +58,20 @@ namespace E_Commerce_Infrastructure
                 };
 
                 var result = await _userManager.CreateAsync(user, "P@ssw0rd");
-                if (!result.Succeeded)
+                if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(user, "SuperAdmin");
+                    _logger.LogInformation("SuperAdmin user created successfully.");
                 }
                 else
                 {
                    _logger.LogError("Failed to create user: {Errors}", string.Join(", ", result.Errors.Select(e => e.Description)));
                 }
+
+            }
+            else
+            {
+                _logger.LogInformation("Users already exist. Skipping user creation.");
             }
         }
     }

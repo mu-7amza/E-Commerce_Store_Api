@@ -1,7 +1,7 @@
 ﻿using E_Commerce_API.Attributes;
 using E_Commerce_Application.Common;
 using E_Commerce_Application.Contracts;
-using E_Commerce_Application.Dtos;
+using E_Commerce_Application.Dtos.Products;
 using E_Commerce_Application.Params;
 using Microsoft.AspNetCore.Mvc;
 

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using E_Commerce_Domain.Contracts;
+using E_Commerce_Domain.Entities.Identity;
 using E_Commerce_Infrastructure.Date;
 using E_Commerce_Infrastructure.Date.DataSeeding;
 using E_Commerce_Infrastructure.Repository;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,7 +25,9 @@ namespace E_Commerce_Infrastructure
 
             services.AddDbContext<StoreIdentityDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("IdentityConnection")));
-
+            services.AddIdentityCore<ApplicationUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<StoreIdentityDbContext>();     
 
             services.AddKeyedScoped<IDataSeeder, CatalogDataSeeder>("Catalog");
             services.AddKeyedScoped<IDataSeeder, IdentityDataSeeder>("Identity");

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using E_Commerce_Application.Common;
 using E_Commerce_Application.Contracts;
-using E_Commerce_Application.Dtos;
+using E_Commerce_Application.Dtos.Baskets;
 using E_Commerce_Domain.Contracts;
 using E_Commerce_Domain.Entities.Basket;
 

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using E_Commerce_Application.Common;
 using E_Commerce_Application.Contracts;
-using E_Commerce_Application.Dtos;
+using E_Commerce_Application.Dtos.Products;
 using E_Commerce_Application.Params;
 using E_Commerce_Application.Services.Specifications;
 using E_Commerce_Domain.Contracts;
