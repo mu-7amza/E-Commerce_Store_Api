@@ -18,7 +18,13 @@ namespace E_Commerce_Infrastructure
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services , IConfiguration configuration)
         {
-            services.AddDbContext<StoreDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<StoreDbContext>(options =>
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<StoreIdentityDbContext>(options =>
+            options.UseSqlServer(configuration.GetConnectionString("IdentityConnection")));
+
+
             services.AddKeyedScoped<IDataSeeder, CatalogDataSeeder>("Catalog");
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
