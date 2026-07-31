@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using E_Commerce_Application.Common;
 using E_Commerce_Application.Contracts;
+using E_Commerce_Application.Dtos.Identity;
 using E_Commerce_Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 

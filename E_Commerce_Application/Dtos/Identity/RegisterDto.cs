@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Commerce_Application.Common
+namespace E_Commerce_Application.Dtos.Identity
 {
     public class RegisterDto
     {
