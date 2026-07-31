@@ -1,6 +1,7 @@
 
 using E_Commerce_Application;
 using E_Commerce_Application.Profiles;
+using E_Commerce_Application.Services;
 using E_Commerce_Infrastructure;
 using Microsoft.Extensions.FileProviders;
 
@@ -18,6 +19,8 @@ namespace E_Commerce_API
             builder.Services.AddInfrastructureServices(builder.Configuration);
             builder.Services.AddApplicationServices();
             builder.Services.Configure<UrlSettings>(builder.Configuration.GetSection("UrlSettings"));
+            builder.Services.Configure<JWTSettings>(builder.Configuration.GetSection("JWT"));
+
 
 
 

@@ -9,7 +9,7 @@ using E_Commerce_Application.Dtos.Identity;
 
 namespace E_Commerce_Application.Services
 {
-    public class AuthenticationService(IIdentityService _identityService) : IAuthenticationService
+    public class AuthenticationService(IIdentityService _identityService , ITokenService _tokenService) : IAuthenticationService
     {
         public async Task<Result<UserDto>> LoginAsync(LoginDto loginDto, CancellationToken ct = default)
         {
@@ -25,12 +25,16 @@ namespace E_Commerce_Application.Services
             {
                 return Result<UserDto>.Fail(Error.UnAuthorized("Invalid email or password."));
             }
+            
+            var rolesResult = await _identityService.GetRolesAsync(loginDto.Email, ct);
+
+            var token = _tokenService.CreateToken(userResult.Data.Id, userResult.Data.Email, userResult.Data.UserName, rolesResult.Data);
 
             return Result<UserDto>.OK(new UserDto
             {
                 Email = userResult.Data.Email,
                 DisplayName = userResult.Data.DisplayName,
-                Token = "Token"
+                Token = token
             });
         }
 
@@ -42,6 +46,11 @@ namespace E_Commerce_Application.Services
             {
                 return Result<UserDto>.Fail(result.Errors);
             }
+
+            var rolesResult = await _identityService.GetRolesAsync(result.Data.Email, ct);
+
+            var token = _tokenService.CreateToken(result.Data.Id, result.Data.Email, result.Data.UserName, rolesResult.Data);
+
 
             return Result<UserDto>.OK(new UserDto
             {
